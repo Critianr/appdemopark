@@ -1,0 +1,12 @@
+/* .container {
+    height: 500p;
+} */
+.container.busqueda{
+    height: 500px;
+}
+.centro{
+    padding-left: 0% !important;
+}
+.table{
+    border: thistle  1px;
+}

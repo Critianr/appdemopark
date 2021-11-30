@@ -1,0 +1,36 @@
+.footer{
+    background: #3691ed;
+    width: 100%;
+    /* height: 50px; */
+    /* display: flex;
+    justify-content: space-around;
+    justify-items: center;
+    align-items: center; */
+    /* align-self: center; */
+}
+.footer-title{
+    display: flex;
+    margin: 5px;
+}
+#footer p {
+    color:white;
+}
+#footer .contact{
+    display: flex;
+    color:white;
+    text-decoration: none;
+}
+#footer a{
+    color:white;
+    text-decoration: none;
+}
+.footer .col {
+   border-left: beige 2px solid;
+}
+/* li{ display: flex;
+    list-style:none;
+}
+li svg{
+    margin: 2px 4px;    
+    padding: 2px;
+} */

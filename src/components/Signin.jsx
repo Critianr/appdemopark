@@ -32,7 +32,7 @@ export default function Signin(){
       const data = await axios.post(process.env.REACT_APP_API_URL + 'auth/login', form,{
           header:{'Accept': 'application/json'}
       } )
-      authHelper.setToken(data.data.token.token)
+      authHelper.setToken(data.data.token)
       let userData = data.data.token.user
       let user = new User(userData._id, userData.name, userData.email)
       console.log(user)

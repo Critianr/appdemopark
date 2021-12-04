@@ -1,0 +1,11 @@
+h2{
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.not{
+    /* width: 100px;
+    height: 100px; */
+    display: flex;
+    justify-content: center;
+}

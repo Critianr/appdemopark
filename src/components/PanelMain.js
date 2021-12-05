@@ -4,10 +4,16 @@ import axios from "axios";
 import authHelper from '../helpers/auth.helper';
 import { Navigate } from "react-router-dom";
 import { format } from 'date-fns'
+import swal from 'sweetalert'
 
 export default class PanelMain extends Component{
   state={
-    data:[],
+    data:{
+      placa: "",
+      Puesto: "",
+      TipoVehiculo: "",
+      tiempoInicio: new Date()
+    },
 
   };
 
@@ -15,29 +21,48 @@ export default class PanelMain extends Component{
   // const puesto = useRef();
   // const tipoVehiculo = useRef();
 
-  infoVehiculo = async (e) =>{
+  infoVehiculo = async () =>{
     // e.preventDefault();
-    const dataVehiculo={
-      placa: this.state.placa,
-      Puesto: this.state.Puesto,
-      TipoVehiculo: this.state.TipoVehiculo,
-      // tiempoInicio: format(this.state.tiempoInicio, 'do MMMM Y')
-    }
-   await axios.post('https://app58.herokuapp.com/api/nuevoticket', dataVehiculo);
-   console.log(dataVehiculo)
+    // const dataVehiculo={
+    //   placa: this.state.placa,
+    //   Puesto: this.state.Puesto,
+    //   TipoVehiculo: this.state.TipoVehiculo,
+    //   tiempoInicio: format(this.state.tiempoInicio, 'do MMMM Y')
+    // }
+    await axios.post('https://app58.herokuapp.com/api/nuevoticket', this.state.data)
+   .then(res => {
+    this.setState({data: res.data});
+    console.log(res);
+    console.log(res.data)
+    
+   })
+   swal({
+     title: "Datos Guardados",
+     text: "Bien",
+     icon: "success",
+     button: "Aceptar",
+   }) 
   }
   onInputChange = (e) =>{
-    // onInputChange reive un evento
+        // onInputChange reive un evento
       this.setState({
-        [e.target.name]: e.target.value
+        data: {
+          ...this.state.data,
+          [e.target.name]: e.target.value,
+        },
     })
+   
   }
-render(){
+  handleFormReset = (e)=>{
+    e.target.reset();
+
+  }
+  render(){
     return (
       authHelper.getToken() ?
         <Fragment>
         <div className="container formulario">
-        <form onSubmit={this.infoVehiculo} className="">
+        <form  onReset={this.handleFormReset} className="container">
        
       <h2 className="">Ingrese la informacion del vehiculo</h2>
     <div className="input-group mb-3">
@@ -67,8 +92,8 @@ render(){
   {/* <!-- <span className="input-group-text" id="inputGroup-sizing-default" >{{ticketDato.tiempoI}}</span> -->
   <!-- <input v-model="ticketDato.tInicio" /> --> */}
 </div>
-  <button type="submit" className="btn btn-success" >Ingresar</button>
-</form> 
+  <button type="button" onClick={this.infoVehiculo} className="btn btn-success" >Ingresar</button>
+</form> button
  </div>
  </Fragment>
         :

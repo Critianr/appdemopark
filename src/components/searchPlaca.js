@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { DateTimePicker } from "@material-ui/pickers";
 import '../assets/css/busqueda.css';
+import swal from 'sweetalert'
 
 import { format } from 'date-fns'
 
@@ -10,19 +11,18 @@ export default function SearchPlaca (){
      _id: '', 
     placa:'',
     TipoVehiculo: '',
-    Puesto:Number,
-    valorP:Number,
-    tiempoInicio:'',
-  });
-  const [dataPun, setDataPun] = useState({
-    tiempoFinal:'',
-    valorP:Number,
-  });
-  const [formtIni , setFormIni] = useState('')
+    Puesto: Number,
+    valorP: Number,
+    tiempoInicio: '',
+      });
+
   const [fechaSelecionada, setFechaSelecionada] = useState(new Date());
   const [busqueda, setBusqueda] = useState('');
   const [valor, setValor] = useState(0);
-  
+  const [dataPun, setDataPun] = useState({
+    tiempoFinal: fechaSelecionada,
+    valorP: valor,
+  });
 const getPlaca=async()=>{
     await axios.get("https://app58.herokuapp.com/api/tickets/placa/" + busqueda)  
     .then(res=>{
@@ -47,42 +47,49 @@ const handleChange=e=>{
   
 // }
 
-const liquidaTiempo = async()=>{
+const liquidaTiempo = ()=>{
  let star = new Date(tickets.tiempoInicio)
  let end = new Date(fechaSelecionada)
- let diffe = Math.abs(end-star)
+ let diffe = Math.abs(end - star)
  let min = Math.floor((diffe/1000)/60)
-
  if(tickets.TipoVehiculo === 'Camion' || tickets.TipoVehiculo ==='Carro' || tickets.TipoVehiculo === 'Camionetas' || tickets.TipoVehiculo === 'Vans' ){
   setValor(min * 75)
  }else{
   setValor(min * 52)
  }
- //  return valorLiquidado
- console.log(min)
-console.log(fechaSelecionada)
-console.log(star)
 console.log(valor)
-
 }
 
 const finTicket = async()=>{
   // console.log(fechaSelecionada, valor)
-  await axios.put('https://app58.herokuapp.com/api/tickets/placa/' + busqueda , dataPun,fechaSelecionada)
-  .then(res=>{
-    var dataNueva = {
-      tiempoFinal:  fechaSelecionada,
-      valorP:  valor
-    }
-    setDataPun(dataNueva)
+  await axios.put('https://app58.herokuapp.com/api/tickets/placa/' + busqueda ,dataPun)
+    .then (res=>{
+      
+      var nuevo = {
+        tiempoFinal:  fechaSelecionada,
+        valorP:  valor
+      }
+    setDataPun(nuevo)
+
   }).catch(error=>{
     console.log(error);
+  })
+  swal({
+    // title: "Valor a pagar",
+    text: "Finalizar ticket ",
+    icon: "warning",
+    button: "Aceptar",
   })
 }
 
 // useEffect(() => {
-//   iniTim();
-// }, []);
+//   // liquidaTiempo();
+//   // finTicket()
+// },[liquidaTiempo]);
+// useEffect(() => {
+//   // liquidaTiempo();
+//   // finTicket()
+// },[finTicket]);
 
   // render(){
     return(
@@ -116,14 +123,14 @@ const finTicket = async()=>{
      <td>{tickets.placa}</td>
     <td>{tickets.Puesto}</td>
     <td>{tickets.TipoVehiculo}</td>
-    <td>{tickets.tiempoInicio}</td>
+    <td> {tickets.tiempoInicio}</td>
         
     <td>
       {/* <label>Fecha</label> */}
-      <DateTimePicker value={fechaSelecionada} onChange={setFechaSelecionada} ></DateTimePicker>
+      <DateTimePicker name="tiempoFinal" value={fechaSelecionada} onChange={setFechaSelecionada} ></DateTimePicker>
     </td>
     <td 
-    // muestraElValor={}
+    // name="valorP"
     >
       {valor}
       </td>
@@ -138,11 +145,11 @@ const finTicket = async()=>{
   <div className="row">
     <div className="col-10">
     <button type="button" 
-    onClick={finTicket} 
-    className="btn btn-warning">Finalizar Tiempo</button>
+    onClick={()=>finTicket()} 
+    className="btn btn-warning">Finalizar Ticket</button>
     </div>
     <div className="col-2">
-      <button type="button" onClick={liquidaTiempo} className="btn btn-success">Valor a Pagar
+      <button type="button" onClick={()=>liquidaTiempo()} className="btn btn-success">Valor a Pagar
       </button>
       </div>
   </div>

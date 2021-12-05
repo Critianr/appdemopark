@@ -19,7 +19,7 @@ const Dashboar = () =>{
         </NavLink>
       </li>
       <li className="nav-item">
-        <NavLink to="/Busqueda"  className="nav-link text-white text-decoration-none" >
+        <NavLink to="/busqueda"  className="nav-link text-white text-decoration-none" >
           <svg className="bi me-2" width="16" height="16"><use href="#speedometer2"/></svg>
           Gestion de Tickets           
         </NavLink>

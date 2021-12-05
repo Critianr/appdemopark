@@ -29,6 +29,9 @@ export default function ViewTickets(){
                       <p className="card-text">
                         Salida <strong>{ticket.tiempoFinal}</strong>
                       </p>
+                        <p className="card-text">
+                        Valor a Pagar <strong>{ticket.Puesto}</strong>
+                      </p>
                       <p className="card-text">
                         Valor a Pagar <strong>{ticket.valorP}</strong>
                       </p>

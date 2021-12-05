@@ -93,7 +93,7 @@ export default class PanelMain extends Component{
   <!-- <input v-model="ticketDato.tInicio" /> --> */}
 </div>
   <button type="button" onClick={this.infoVehiculo} className="btn btn-success" >Ingresar</button>
-</form> button
+</form> 
  </div>
  </Fragment>
         :

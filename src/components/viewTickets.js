@@ -24,19 +24,19 @@ export default function ViewTickets(){
 
                       </h3>
                       <p className="card-text">
-                        Entrada <strong>{ticket.tiempoInicio}</strong>
+                        Entrada: <strong>{ticket.tiempoInicio}</strong>
                       </p>
                       <p className="card-text">
-                        Salida <strong>{ticket.tiempoFinal}</strong>
+                        Salida: <strong>{ticket.tiempoFinal}</strong>
                       </p>
                         <p className="card-text">
-                        Valor a Pagar <strong>{ticket.Puesto}</strong>
+                        Puesto:<strong>{ticket.Puesto}</strong>
                       </p>
                       <p className="card-text">
-                        Valor a Pagar <strong>{ticket.TipoVehiculo}</strong>
+                       Tipo de Vehiculo: <strong>{ticket.TipoVehiculo}</strong>
                       </p>
                       <p className="card-text">
-                        Valor a Pagar <strong>{ticket.valorP}</strong>
+                        Valor: <strong>{ticket.valorP}</strong>
                       </p>
                            </div>
                   </div>

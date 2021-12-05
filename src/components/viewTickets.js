@@ -32,10 +32,7 @@ export default function ViewTickets(){
                       <p className="card-text">
                         Valor a Pagar <strong>{ticket.valorP}</strong>
                       </p>
-                      <a href={ticket.website} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                        Go to website
-                      </a>
-                    </div>
+                           </div>
                   </div>
             ))}                  
         </div>

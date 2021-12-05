@@ -33,6 +33,9 @@ export default function ViewTickets(){
                         Valor a Pagar <strong>{ticket.Puesto}</strong>
                       </p>
                       <p className="card-text">
+                        Valor a Pagar <strong>{ticket.TipoVehiculo}</strong>
+                      </p>
+                      <p className="card-text">
                         Valor a Pagar <strong>{ticket.valorP}</strong>
                       </p>
                            </div>

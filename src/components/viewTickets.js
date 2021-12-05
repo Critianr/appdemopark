@@ -30,7 +30,7 @@ export default function ViewTickets(){
                         Salida: <strong>{ticket.tiempoFinal}</strong>
                       </p>
                         <p className="card-text">
-                        Puesto:<strong>{ticket.Puesto}</strong>
+                        Puesto: <strong>{ticket.Puesto}</strong>
                       </p>
                       <p className="card-text">
                        Tipo de Vehiculo: <strong>{ticket.TipoVehiculo}</strong>
